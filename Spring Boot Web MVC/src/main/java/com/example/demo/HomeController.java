@@ -2,23 +2,25 @@ package com.example.demo;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
 
     @RequestMapping
     public String home(){
-        return "form.jsp";
+        return "form";
     }
 
     @RequestMapping("/add")
-    public String add(int num1, int num2 , HttpSession session) {
+    public ModelAndView add(int num1, int num2 , ModelAndView mv) {
 
         int result = num1+num2;
-        session.setAttribute("result",result);
-
-        return "result.jsp";
+        mv.addObject("result",result);
+        mv.setViewName("result");
+        return mv;
     }
 }
